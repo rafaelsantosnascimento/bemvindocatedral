@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Mapa dos CNCs | Bem-Vindo | Catedral Evangélica do Brasil</title>
+<meta name="description" content="Mapa dos CNCs (Catedral nas Casas) — acesso restrito à liderança e voluntários do Bem-Vindo.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --azul: #0E74BE;
+    --dourado: #C9A227;
+    --dourado-escuro: #A6811C;
+    --creme: #F7F4EF;
+    --texto: #2b2b2b;
+    --texto-suave: #6b6b6b;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, var(--creme) 0%, #ffffff 55%);
+    color: var(--texto);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .wordmark{
+    font-weight:700;
+    font-size: clamp(28px, 7vw, 38px);
+    color: var(--azul);
+    letter-spacing: 0.01em;
+    margin:0;
+  }
+  .wordmark .ponto{ color: var(--dourado); margin: 0 2px; }
+  .subtitulo{
+    color: var(--dourado-escuro);
+    font-weight:600;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 8px 0 0;
+    text-align:center;
+  }
+
+  /* ---------- tela de senha ---------- */
+  #gate{
+    width:100%;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding: 40px 20px;
+  }
+  #gate .card{
+    width:100%;
+    max-width: 380px;
+    background:#ffffff;
+    border:1px solid #e8e2d6;
+    border-radius:16px;
+    padding: 28px 26px;
+    box-shadow: 0 1px 3px rgba(20,20,20,0.04);
+    text-align:center;
+  }
+  #gate h1{
+    font-size:18px;
+    margin: 4px 0 8px;
+    color: var(--texto);
+  }
+  #gate p{
+    font-size: 14px;
+    color: var(--texto-suave);
+    line-height:1.5;
+    margin: 0 0 20px;
+  }
+  #senha{
+    width:100%;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d8d2c4;
+    outline: none;
+    text-align:center;
+    letter-spacing: 0.05em;
+  }
+  #senha:focus{ border-color: var(--azul); }
+  #entrar{
+    margin-top: 14px;
+    width:100%;
+    font-family: inherit;
+    font-weight:600;
+    font-size: 15px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, var(--azul), #0a5690);
+    color: #fff;
+    cursor: pointer;
+  }
+  #entrar:active{ transform: scale(0.98); }
+  #erro{
+    margin-top: 12px;
+    font-size: 13px;
+    color: #b3261e;
+    min-height: 18px;
+  }
+  #ajuda{
+    margin-top: 22px;
+    font-size: 12px;
+    color:#a8a29a;
+    line-height:1.6;
+  }
+
+  /* ---------- mapa ---------- */
+  #mapa-wrap{
+    display:none;
+    width:100%;
+    flex:1;
+    flex-direction:column;
+    align-items:center;
+    padding: 20px 16px 24px;
+  }
+  #mapa-aviso{
+    max-width: 720px;
+    width:100%;
+    font-size: 12px;
+    color: var(--dourado-escuro);
+    background: #FBF3E2;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 14px 0;
+    text-align:center;
+    line-height:1.5;
+  }
+  #mapa-frame{
+    width:100%;
+    max-width: 960px;
+    flex:1;
+    min-height: 60vh;
+    border-radius: 14px;
+    overflow:hidden;
+    border:1px solid #e8e2d6;
+    box-shadow: 0 1px 3px rgba(20,20,20,0.04);
+  }
+  #mapa-frame iframe{ width:100%; height:100%; min-height:60vh; border:0; }
+
+  footer{
+    padding: 24px 0 20px;
+    text-align:center;
+    color:#a8a29a;
+    font-size:12px;
+    line-height:1.6;
+  }
+  footer strong{color:#8a8578;}
+  footer a{ color:#8a8578; }
+</style>
+</head>
+<body>
+  <div style="padding-top:36px;">
+    <p class="wordmark">BEM<span class="ponto">&middot;</span>VINDO</p>
+    <p class="subtitulo">Mapa dos CNCs</p>
+  </div>
+
+  <div id="gate">
+    <div class="card">
+      <h1>Acesso restrito</h1>
+      <p>Os endereços dos CNCs (Catedral nas Casas) são de casas de irmãos da igreja, não um dado público. Peça a senha à liderança da sua frente.</p>
+      <input type="password" id="senha" placeholder="Senha" autocomplete="off" inputmode="text">
+      <button id="entrar">Ver o mapa</button>
+      <div id="erro"></div>
+    </div>
+    <p id="ajuda">Voltar para o <a href="/">Bem-Vindo</a></p>
+  </div>
+
+  <div id="mapa-wrap">
+    <div id="mapa-aviso">Não repasse este link fora da equipe do Bem-Vindo. Os endereços são de casas de irmãos da igreja.</div>
+    <div id="mapa-frame">
+      <iframe id="gmaps-iframe" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <footer>
+    <strong>Catedral Evangélica do Brasil</strong><br>
+    Departamento Bem-Vindo
+  </footer>
+
+  <script>
+    // sha-256(senha) — a senha em si não fica escrita aqui.
+    var SENHA_HASH = "d4c6b3d06c52d3ff79375609d44a3f0f7e3256d7b0945ee48e18b4ba7bb9cf72";
+    var MAPA_SRC = "https://www.google.com/maps/d/embed?mid=1GkLWS4BgsI4917DlC7T5Z0A7mFTL2hE&ehbc=2E312F";
+
+    async function sha256Hex(texto) {
+      var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(texto));
+      return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2, "0"); }).join("");
+    }
+
+    function mostrarMapa() {
+      document.getElementById("gmaps-iframe").src = MAPA_SRC;
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("mapa-wrap").style.display = "flex";
+      try { sessionStorage.setItem("cncs_ok", "1"); } catch (e) {}
+    }
+
+    async function tentarEntrar() {
+      var campo = document.getElementById("senha");
+      var erro = document.getElementById("erro");
+      var digitada = campo.value || "";
+      if (!digitada) { return; }
+      var hash = await sha256Hex(digitada);
+      if (hash === SENHA_HASH) {
+        erro.textContent = "";
+        mostrarMapa();
+      } else {
+        erro.textContent = "Senha incorreta.";
+        campo.value = "";
+        campo.focus();
+      }
+    }
+
+    document.getElementById("entrar").addEventListener("click", tentarEntrar);
+    document.getElementById("senha").addEventListener("keydown", function(e){
+      if (e.key === "Enter") { tentarEntrar(); }
+    });
+
+    // Evita pedir a senha de novo a cada recarregamento na mesma sessão do navegador.
+    try {
+      if (sessionStorage.getItem("cncs_ok") === "1") { mostrarMapa(); }
+    } catch (e) {}
+  </script>
+</body>
+</html>
+
